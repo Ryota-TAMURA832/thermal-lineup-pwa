@@ -355,60 +355,70 @@
         };
 
         window.createMemberSheetPdfFromCanvas = async function (rawState) {
-            if (!window.jspdf) {
-                alert("PDF作成ライブラリを読み込めませんでした。js/jspdf.umd.min.js が存在するか確認してください。");
-                return;
+            const area = document.getElementById("pdf-link-area");
+            const status = document.getElementById("pdf-status");
+            const link = document.getElementById("pdf-open-link");
+
+            if (area) area.style.display = "block";
+            if (status) status.textContent = "PDF生成中...";
+            if (link) {
+                link.removeAttribute("href");
+                link.removeAttribute("download");
             }
-
-            const info = window.drawMemberSheetCanvas(rawState);
-            if (!info) return;
-
-            const canvas = document.getElementById("member-sheet-canvas");
-            const imgData = canvas.toDataURL("image/png");
-
-            const { jsPDF } = window.jspdf;
-
-            const pdf = new jsPDF({
-                orientation: "portrait",
-                unit: "mm",
-                format: [info.widthMm, info.heightMm]
-            });
-
-            pdf.addImage(imgData, "PNG", 0, 0, info.widthMm, info.heightMm);
-
-            const blob = pdf.output("blob");
-            const fileName = "membersheet_80mm.pdf";
-            const file = new File([blob], fileName, { type: "application/pdf" });
 
             try {
-                if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
-                    await navigator.share({
-                        files: [file],
-                        title: "メンバー表",
-                        text: "メンバー表PDF"
-                    });
+                if (!window.jspdf) {
+                    if (status) status.textContent = "PDF生成失敗: jsPDFを読み込めませんでした。";
+                    alert("PDF作成ライブラリを読み込めませんでした。js/jspdf.umd.min.js が存在するか確認してください。");
                     return;
                 }
+
+                const info = window.drawMemberSheetCanvas(rawState);
+                if (!info) {
+                    if (status) status.textContent = "PDF生成失敗: Canvas作成に失敗しました。";
+                    return;
+                }
+
+                const canvas = document.getElementById("member-sheet-canvas");
+                const imgData = canvas.toDataURL("image/png");
+
+                const { jsPDF } = window.jspdf;
+
+                const pdf = new jsPDF({
+                    orientation: "portrait",
+                    unit: "mm",
+                    format: [info.widthMm, info.heightMm]
+                });
+
+                pdf.addImage(imgData, "PNG", 0, 0, info.widthMm, info.heightMm);
+
+                const blob = pdf.output("blob");
+                const fileName = "membersheet_80mm.pdf";
+
+                if (window.memberSheetPdfUrl) {
+                    URL.revokeObjectURL(window.memberSheetPdfUrl);
+                }
+
+                const url = URL.createObjectURL(blob);
+                window.memberSheetPdfUrl = url;
+
+                if (link) {
+                    link.href = url;
+                    link.download = fileName;
+                    link.target = "_blank";
+                    link.rel = "noopener";
+                }
+
+                if (status) {
+                    status.textContent = `PDF生成成功: ${blob.size.toLocaleString()} bytes`;
+                }
             } catch (e) {
-                console.warn("Share canceled or failed:", e);
+                console.error(e);
+                if (status) {
+                    status.textContent = "PDF生成失敗: " + (e && e.message ? e.message : String(e));
+                }
+                alert("PDF生成に失敗しました: " + (e && e.message ? e.message : String(e)));
             }
-
-            const url = URL.createObjectURL(blob);
-
-            const opened = window.open(url, "_blank");
-            if (!opened) {
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = fileName;
-                a.rel = "noopener";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-
-            setTimeout(() => {
-                URL.revokeObjectURL(url);
-            }, 60000);
         };
     </script>
 </body>

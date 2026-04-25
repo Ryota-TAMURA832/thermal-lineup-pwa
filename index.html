@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <title>ThermalLineupPwa</title>
-    <base href="/" />
+    <base href="/thermal-lineup-pwa/" />
 
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -27,9 +27,9 @@
     </div>
 
     <div id="blazor-error-ui">
-        エラーが発生しました。
-        <a href="" class="reload">再読み込み</a>
-        <a class="dismiss">🗙</a>
+        繧ｨ繝ｩ繝ｼ縺檎匱逕溘＠縺ｾ縺励◆縲・
+        <a href="" class="reload">蜀崎ｪｭ縺ｿ霎ｼ縺ｿ</a>
+        <a class="dismiss">吏</a>
     </div>
 
     <script src="_framework/blazor.webassembly.js"></script>
@@ -171,7 +171,7 @@
 
             const canvas = document.getElementById("member-sheet-canvas");
             if (!canvas) {
-                alert("Canvasが見つかりません。");
+                alert("Canvas縺瑚ｦ九▽縺九ｊ縺ｾ縺帙ｓ縲・);
                 return null;
             }
 
@@ -227,7 +227,7 @@
 
             let y = margin;
 
-            drawCenteredText(ctx, "メンバー表", margin, y, contentW, titleH, fontFamily, 54, "700");
+            drawCenteredText(ctx, "繝｡繝ｳ繝舌・陦ｨ", margin, y, contentW, titleH, fontFamily, 54, "700");
             y += titleH + titleGap;
 
             const headerX = margin;
@@ -236,10 +236,10 @@
             const headerCellH = headerH / 2;
 
             const headerCells = [
-                { label: "チーム名", value: state.teamName, x: headerX, y: headerY },
-                { label: "監督", value: state.coachName, x: headerX + headerCellW, y: headerY },
-                { label: "大会名", value: state.selectedTournament, x: headerX, y: headerY + headerCellH },
-                { label: "主将", value: state.captainName, x: headerX + headerCellW, y: headerY + headerCellH }
+                { label: "繝√・繝蜷・, value: state.teamName, x: headerX, y: headerY },
+                { label: "逶｣逹｣", value: state.coachName, x: headerX + headerCellW, y: headerY },
+                { label: "螟ｧ莨壼錐", value: state.selectedTournament, x: headerX, y: headerY + headerCellH },
+                { label: "荳ｻ蟆・, value: state.captainName, x: headerX + headerCellW, y: headerY + headerCellH }
             ];
 
             for (const c of headerCells) {
@@ -269,10 +269,10 @@
             drawLine(ctx, xNo, regularY, xNo, regularY + regularH, linePx);
             drawLine(ctx, regularX, regularY + regularHeadH, regularX + contentW, regularY + regularHeadH, linePx);
 
-            drawCenteredText(ctx, "打順", xOrder, regularY, cOrder, regularHeadH, fontFamily, 26, "600");
-            drawCenteredText(ctx, "守備", xPos, regularY, cPos, regularHeadH, fontFamily, 26, "600");
-            drawCenteredText(ctx, "選手名", xName, regularY, cName, regularHeadH, fontFamily, 26, "600");
-            drawCenteredText(ctx, "背番号", xNo, regularY, cNo, regularHeadH, fontFamily, 25, "600");
+            drawCenteredText(ctx, "謇馴・, xOrder, regularY, cOrder, regularHeadH, fontFamily, 26, "600");
+            drawCenteredText(ctx, "螳亥ｙ", xPos, regularY, cPos, regularHeadH, fontFamily, 26, "600");
+            drawCenteredText(ctx, "驕ｸ謇句錐", xName, regularY, cName, regularHeadH, fontFamily, 26, "600");
+            drawCenteredText(ctx, "閭檎分蜿ｷ", xNo, regularY, cNo, regularHeadH, fontFamily, 25, "600");
 
             for (let i = 0; i < 10; i++) {
                 const row = state.regularRows[i] || {};
@@ -315,10 +315,10 @@
             drawLine(ctx, bxRNo, benchY, bxRNo, benchY + benchH, linePx);
             drawLine(ctx, benchX, benchY + benchHeadH, benchX + contentW, benchY + benchHeadH, linePx);
 
-            drawCenteredText(ctx, "控え 選手名", bxLName, benchY, benchNameW, benchHeadH, fontFamily, 26, "600");
-            drawCenteredText(ctx, "背番号", bxLNo, benchY, benchNoW, benchHeadH, fontFamily, 25, "600");
-            drawCenteredText(ctx, "控え 選手名", bxRName, benchY, benchNameW, benchHeadH, fontFamily, 26, "600");
-            drawCenteredText(ctx, "背番号", bxRNo, benchY, benchNoW, benchHeadH, fontFamily, 25, "600");
+            drawCenteredText(ctx, "謗ｧ縺・驕ｸ謇句錐", bxLName, benchY, benchNameW, benchHeadH, fontFamily, 26, "600");
+            drawCenteredText(ctx, "閭檎分蜿ｷ", bxLNo, benchY, benchNoW, benchHeadH, fontFamily, 25, "600");
+            drawCenteredText(ctx, "謗ｧ縺・驕ｸ謇句錐", bxRName, benchY, benchNameW, benchHeadH, fontFamily, 26, "600");
+            drawCenteredText(ctx, "閭檎分蜿ｷ", bxRNo, benchY, benchNoW, benchHeadH, fontFamily, 25, "600");
 
             for (let i = 0; i < 5; i++) {
                 const rowY = benchY + benchHeadH + benchRowH * i;
@@ -356,7 +356,7 @@
 
         window.createMemberSheetPdfFromCanvas = async function (rawState) {
             if (!window.jspdf) {
-                alert("PDF作成ライブラリを読み込めませんでした。js/jspdf.umd.min.js が存在するか確認してください。");
+                alert("PDF菴懈・繝ｩ繧､繝悶Λ繝ｪ繧定ｪｭ縺ｿ霎ｼ繧√∪縺帙ｓ縺ｧ縺励◆縲Ｋs/jspdf.umd.min.js 縺悟ｭ伜惠縺吶ｋ縺狗｢ｺ隱阪＠縺ｦ縺上□縺輔＞縲・);
                 return;
             }
 

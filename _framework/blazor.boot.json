@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "ThermalLineupPwa",
   "resources": {
-    "hash": "sha256-RTmgRVX5pr7+k6HcirztIUYDSKz9v/Me9aD3lcxnAVs=",
+    "hash": "sha256-N6MkGFEzbieff/nc7Hy0X6F2fqPYgRMl/flUmzYlydQ=",
     "jsModuleNative": {
       "dotnet.native.8.0.26.0twdirfj1e.js": "sha256-nElGk+CZFyq0PbPm4JU8avD6lER7x9Z1C54BK7qY12Q="
     },
@@ -48,7 +48,7 @@
       "System.Text.Encodings.Web.wasm": "sha256-yR8c+9PKIKNtrs26B7+ItdymjFw9AkeCiq5/LpQV8aE=",
       "System.Text.Json.wasm": "sha256-XdVY6P/1uoDYSOjLHYZZZUeiU85Pl05qgv62ZeiqFQ4=",
       "System.Text.RegularExpressions.wasm": "sha256-t7Lid6gWSi4pImqrn+xSTobrpgELxnYpM4OksaVB6II=",
-      "ThermalLineupPwa.wasm": "sha256-nARK8dmw1OWu15h2gPaoSsCfT8wqFnViGUU9gKa92YA="
+      "ThermalLineupPwa.wasm": "sha256-IY5XmPGME/JgNKYZznS7byndim/OrEFYTBpP6w0kx8g="
     }
   },
   "cacheBootResources": true,
